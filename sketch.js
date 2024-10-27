@@ -1,16 +1,14 @@
-let ball, spikes;
+let player, spikes;
 let floor, wallL, wallR, ceiling;
 let sparkle;
+
+let pscore = 0;
+let tscore = 0;
 
 function setup() {
 	new Canvas(1000, 600);
 	displayMode('centered');
 	//world.gravity.y = 5;
-
-	ball = new Sprite();
-	ball.diameter = 50;
-	ball.textSize = 30;
-	ball.text = "•⩊•"
 
 	//sparkle = new Sprite(450, 250, 15);
 	//sparkle.vel.y = 5;
@@ -19,6 +17,8 @@ function setup() {
 	sparkle.x = () => random(0, canvas.w);
 	sparkle.y = () => random(0, canvas.h);
 	sparkle.amount = 40;
+	sparkle.color = 'white';
+	sparkle.stroke = 'gold';
 
 	floor = new Sprite(500, 598, 1000, 5, 's');
 	floor.color = 'skyblue';
@@ -32,6 +32,14 @@ function setup() {
 	spikes = new Turtle(30);
 	randomSequence();
 
+	player = new Sprite();
+	player.diameter = 50;
+	player.textSize = 30;
+	player.text = "•⩊•"
+	player.color = 'pink';
+
+	player.overlaps(sparkle, collect);
+
 
 	async function randomSequence() {
 		let x = random(0, width);
@@ -44,14 +52,31 @@ function setup() {
 	
 }
 
+function collect(player, sparkle){
+	sparkle.remove();
+	pscore +=1;
+	//new sparkle.Sprite(random(width), random(height));
+}
+
 function draw() {
+	clear();
 	background('skyblue');
 
+	textSize(20);
+	fill('pink');
+	stroke('black');
+	text('Player: ' + pscore, 70, 50);
+
+	fill('green');
+	text('Triangle: ' + tscore, 800, 50);
+	
 	//sparkle.attractTo(ball, 5);
 
-	ball.moveTowards(mouse, .04);
+	player.moveTowards(mouse, .04);
 
 
 }
+
+
 
 
