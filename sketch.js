@@ -31,6 +31,7 @@ function setup() {
 
 	spikes = new Turtle(30);
 	randomSequence();
+	spikes.overlap(sparkle, collector);
 
 	player = new Sprite();
 	player.diameter = 50;
@@ -39,6 +40,7 @@ function setup() {
 	player.color = 'pink';
 
 	player.overlaps(sparkle, collect);
+	
 
 
 	async function randomSequence() {
@@ -51,12 +53,17 @@ function setup() {
 
 	
 }
-
+function collector(spikes, sparkle){
+	sparkle.remove();
+	tscore +=1;
+}
 function collect(player, sparkle){
 	sparkle.remove();
 	pscore +=1;
 	//new sparkle.Sprite(random(width), random(height));
 }
+
+
 
 function draw() {
 	clear();
