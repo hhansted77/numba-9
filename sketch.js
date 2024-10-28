@@ -49,6 +49,7 @@ function setup() {
 	player.overlaps(sparkle, collect);
 	//player.overlaps(rotator);
 
+
 	rotator = new Sprite(200, 157, 80, 10,);
 	rotator.color = 'skyblue';
 	rotator.stroke = 'skyblue';
@@ -98,6 +99,14 @@ function draw() {
 
 	player.moveTowards(mouse, .02);
 
+	if (player.collides(spikes)){
+		pscore -=1;
+		tscore +=1;
+	}
+
+	if (player.collides(rotator)){
+		player.overlaps(rotator);
+	}
 
 }
 
